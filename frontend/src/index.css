@@ -1,0 +1,402 @@
+/* ── Reset & base ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-bg:        #f5f6fa;
+  --color-surface:   #ffffff;
+  --color-border:    #e2e4ea;
+  --color-primary:   #3b6ef5;
+  --color-primary-h: #2554d4;
+  --color-danger:    #e03e3e;
+  --color-success:   #27ae60;
+  --color-muted:     #6b717f;
+  --color-text:      #1a1d23;
+  --radius:          8px;
+  --shadow:          0 2px 12px rgba(0,0,0,.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+body { min-height: 100vh; }
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.app-header .logo {
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+.app-main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 24px;
+}
+
+/* ── Steps indicator ──────────────────────────────────────────────────── */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 36px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.step-item.active { color: var(--color-primary); font-weight: 600; }
+.step-item.done   { color: var(--color-success); }
+
+.step-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-item.active .step-dot { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+.step-item.done   .step-dot { background: var(--color-success); color: #fff; border-color: var(--color-success); }
+
+.step-connector {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+  margin: 0 12px;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+
+.card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card .subtitle {
+  color: var(--color-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* ── Drop zone ────────────────────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+
+.drop-zone:hover, .drop-zone.dragging {
+  border-color: var(--color-primary);
+  background: #f0f4ff;
+}
+
+.drop-zone .dz-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.drop-zone .dz-label {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.drop-zone .dz-sub {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.drop-zone input[type="file"] {
+  display: none;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #f0f4ff;
+  border: 1px solid #c7d5fb;
+  border-radius: var(--radius);
+  margin-top: 16px;
+}
+
+.file-selected .file-icon { font-size: 20px; }
+
+.file-selected .file-name {
+  flex: 1;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.file-selected .file-size {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-primary  { background: var(--color-primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--color-primary-h); }
+
+.btn-outline  { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
+.btn-outline:hover:not(:disabled) { background: var(--color-bg); }
+
+.btn-success  { background: var(--color-success); color: #fff; }
+.btn-success:hover:not(:disabled) { background: #1e9950; }
+
+.btn-small {
+  padding: 7px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  justify-content: flex-end;
+}
+
+/* ── Error banner ─────────────────────────────────────────────────────── */
+.error-banner {
+  background: #fef0f0;
+  border: 1px solid #f5c6c6;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  color: var(--color-danger);
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+/* ── Spinner ──────────────────────────────────────────────────────────── */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+
+.spinner.dark {
+  border-color: rgba(0,0,0,.15);
+  border-top-color: var(--color-primary);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Mapping table ────────────────────────────────────────────────────── */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--color-muted);
+  margin-bottom: 12px;
+}
+
+.mapping-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 28px;
+  table-layout: fixed;
+}
+
+.mapping-table .col-name { width: 16%; }
+.mapping-table .col-uri { width: 34%; }
+
+.mapping-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.mapping-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.mapping-table tr:last-child td { border-bottom: none; }
+
+.source-val {
+  font-family: monospace;
+  font-size: 13px;
+  background: var(--color-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+  display: block;
+}
+
+.uri-val {
+  max-width: none;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.45;
+}
+
+.mapping-input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: monospace;
+  outline: none;
+  transition: border-color .15s;
+}
+
+.mapping-input:focus { border-color: var(--color-primary); }
+.mapping-input.invalid { border-color: var(--color-danger); }
+
+.mapping-textarea {
+  min-height: 56px;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+
+.uri-target-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* ── Summary card ─────────────────────────────────────────────────────── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.summary-stat {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.summary-stat .stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.summary-stat .stat-label {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.success-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ── Stat chips in upload result ──────────────────────────────────────── */
+.parse-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: #eef2ff;
+  border: 1px solid #c7d5fb;
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--color-primary);
+  font-weight: 500;
+}
